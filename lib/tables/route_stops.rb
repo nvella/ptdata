@@ -12,15 +12,15 @@ module PTSheets::Tables
       "stop_sequence" => 0
     }
 
-    def self.get(route_type_id)
+    def self.get(route_id, route_type_id)
       PTSheets::Table.new(
-        "#{PTSheets::ROUTE_TYPES.select {|k,v| v == route_type_id.to_i}.first[0]} Routes",
+        "#{PTSheets::ROUTE_TYPES.select {|k,v| v == route_type_id.to_i}.first[0]} Route #{route_id} Stops",
         SCHEMA.keys,
-        PTSheets::PTV.routes(route_types: [route_type_id]).map do |route|
+        PTSheets::PTV.stops_for_route(route_id, route_type_id).map do |stop|
           {
             vals: route,
             links: {
-              'route_name' => "/routes/#{route_type_id}/#{route['route_id']}"
+              'stop_name' => "/stop/#{route_type_id}/#{stop['stop_id']}"
             }
           }
         end

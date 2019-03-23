@@ -27,3 +27,7 @@ end
 get '/routelist/:route_type/csv' do
 
 end
+
+get '/route/:route_type_id/:route_id' do
+  erb(:table, layout: layout, locals: {table: PTSheets::Tables::Routes.get(params[:route_type_id], params[:route_id])})
+end
