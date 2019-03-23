@@ -1,0 +1,21 @@
+<h1><%= table.title %></h1>
+<table class="data-table">
+    <tr>
+        <% table.cols.each do |col| %>
+        <th><%= col %></td>
+        <% end %>
+    </th>
+    <% table.rows.each do |row| %>
+    <tr>
+        <% table.cols.each do |col| %>
+            <td>
+            <% if row[:links][col] %><a href="<%= row[:links][col] %>"><% end %>
+            <%= row[:vals][col] %>
+            <% if row[:links][col] %></a><% end %>
+            </td>
+        <% end %>
+    </tr>
+    <% end %>
+</table>
+<a href="csv">[Download as CSV]</a>
+<em>To import into Excel, paste the page URL into 'Import for Web' on the Data tab</em>

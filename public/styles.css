@@ -1,0 +1,21 @@
+.data-table {
+    margin-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th {
+    background-color: black;
+    color: white;
+
+}
+
+table, th, td {
+    padding: 2px 5px;
+}

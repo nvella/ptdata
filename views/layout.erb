@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PTSheets</title>
+        <link rel="stylesheet" href="/styles.css" type="text/css">
+    </head>
+    <body>
+        <div class="box">
+            <div class="header">
+                <h1 style="display: inline; padding-right: 10px;">PTSheets</h1>
+                <span><a href="/">[Home]</a> | Routes: </span>
+                <% PTSheets::ROUTE_TYPES.map do |k, v| %><a href="/routelist/<%=v%>">[<%=k%>]</a> <% end %>
+                <span>| <a href="/about">[About/Contact]</a></span>
+                <hr/>
+            </div>
+            <div class="container">
+                <%= yield %>
+            </div>
+            <hr/>
+            <p>PTSheets Copyright (c) 2019 Nick Vella, licensed under MIT - <a href="http://nxk.io">http://nxk.io</a> - feedback: nick at nxk dot io<br/>All data copyright PTV</p>
+        </div>
+    </body>
+</html>
+        
