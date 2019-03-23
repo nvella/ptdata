@@ -46,5 +46,11 @@
     </tr>
     <% end %>
 </table>
-<a href="csv">[Download as CSV]</a>
+<form style="display: inline-block;">
+    <% params.each do |k, v| %>
+    <input type="hidden" name="<%= k %>" value="<%= v %>">
+    <% end %>
+    <input type="hidden" name="csv" value="yes">
+    <input type="submit" value="Download CSV">
+</form>
 <em>To import into Excel, paste the page URL into 'Import for Web' on the Data tab</em>
