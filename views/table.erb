@@ -1,4 +1,33 @@
 <h1><%= table.title %></h1>
+
+<% unless query_params.empty? %>
+<form class="params">
+    <b>Query Parameters: </b>
+    <% query_params.each do |k, v| %>
+    <span class="params-param">
+        <span><%= v[:label] %></span>
+        <%
+        case v[:type]
+        when :select
+            %>
+        <select name="<%= k %>">
+            <% v[:options].each do |opt, v| %>
+            <option value="<%= opt %>" <% if params[k] == opt %>selected<%end%>><%= v %></option>
+            <% end %>
+        </select>
+            <%
+        else
+            %>
+        <input type="<%= v[:type] %>" name="<%= k %>" value="<%= v[:val] %>">
+            <%
+        end
+        %>
+    </span>
+    <% end %>
+    <input type="submit" value="Submit">    
+</form>
+<% end %>
+
 <table class="data-table">
     <tr>
         <% table.cols.each do |col| %>
