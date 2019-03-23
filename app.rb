@@ -31,10 +31,6 @@ get '/routes/:route_type' do
   })
 end
 
-get '/routes/:route_type/csv' do
-
-end
-
 get '/stops/:route_type_id/:route_id' do
   erb(:table, layout: :layout, locals: {
     table: PTSheets::Tables::Stops.get(params[:route_type_id], params[:route_id]),
@@ -50,7 +46,7 @@ get '/departures/:route_type_id/:stop_id' do
     query_params: {
       date: {
         label: 'Date (yyyy-mm-dd format)',
-        value: date.iso8601,
+        val: date.iso8601,
         type: :input
       }
     }
