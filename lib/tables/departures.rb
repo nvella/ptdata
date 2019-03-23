@@ -6,6 +6,7 @@ module PTSheets::Tables
     SCHEMA = {
       "stop_id" => 0,
       "route_id" => 0,
+      "route_number" => 0,
       "route_name" => "",
       "run_id" => 0,
       "direction_id" => 0,
@@ -38,6 +39,7 @@ module PTSheets::Tables
             {
               vals: departure.merge({
                 "route_name" => data["routes"][departure["route_id"].to_s]["route_name"],
+                "route_number" => data["routes"][departure["route_id"].to_s]["route_number"],
                 "direction_name" => data["directions"][departure["direction_id"].to_s]["direction_name"],
                 "scheduled_departure_human" => DateTime.parse(departure["scheduled_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y-%m-%d %H:%M:%S"),
                 #"estimated_departure_human" => departure["estimated_departure_utc"] ? 
@@ -45,7 +47,8 @@ module PTSheets::Tables
               }),
               links: {
                 'route_id' => "/stops/#{route_type_id}/#{departure['route_id']}",
-                'route_name' => "/stops/#{route_type_id}/#{departure['route_id']}"
+                'route_name' => "/stops/#{route_type_id}/#{departure['route_id']}",
+                'route_number' => "/stops/#{route_type_id}/#{departure['route_id']}"
               }
             }
           end
