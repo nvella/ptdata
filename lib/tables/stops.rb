@@ -20,8 +20,8 @@ module PTSheets::Tables
           {
             vals: stop,
             links: {
-              'stop_id' => "/departures/#{route_type_id}/#{stop['stop_id']}",
-              'stop_name' => "/departures/#{route_type_id}/#{stop['stop_id']}",
+              'stop_id' => "/q/departures?route_type_id=#{route_type_id}&stop_id=#{stop['stop_id']}",
+              'stop_name' => "/q/departures?route_type_id=#{route_type_id}&stop_id=#{stop['stop_id']}"
             }
           }
         end

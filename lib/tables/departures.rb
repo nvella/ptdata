@@ -46,9 +46,9 @@ module PTSheets::Tables
                 #  DateTime.parse(departure["estimated_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y/%m/%d %H:%M:%S") : nil,
               }),
               links: {
-                'route_id' => "/stops/#{route_type_id}/#{departure['route_id']}",
-                'route_name' => "/stops/#{route_type_id}/#{departure['route_id']}",
-                'route_number' => "/stops/#{route_type_id}/#{departure['route_id']}"
+                'route_id' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
+                'route_name' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
+                'route_number' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
               }
             }
           end

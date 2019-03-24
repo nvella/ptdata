@@ -1,0 +1,56 @@
+<h1><%= result.title %></h1>
+
+<% unless query.params.empty? %>
+<form class="params">
+    <b>Query Parameters: </b>
+    <% query.params.each do |k, v| %>
+    <span class="params-param">
+        <span><%= v[:label] %></span>
+        <%
+        case v[:type]
+        when :select
+            %>
+        <select name="<%= k %>">
+            <% v[:options].each do |opt, v| %>
+            <option value="<%= opt %>" <% if params[k] == opt %>selected<%end%>><%= v %></option>
+            <% end %>
+        </select>
+            <%
+        else
+            %>
+        <input type="<%= v[:type] %>" name="<%= k %>" value="<%= query_params[k] %>">
+            <%
+        end
+        %>
+    </span>
+    <% end %>
+    <input type="submit" value="Submit">    
+</form>
+<% end %>
+
+<table class="data-table">
+    <tr>
+        <% result.cols.each do |col| %>
+        <th><%= col %></td>
+        <% end %>
+    </th>
+    <% result.rows.each do |row| %>
+    <tr>
+        <% result.cols.each do |col| %>
+            <td>
+            <% if row[:links][col] %><a href="<%= row[:links][col] %>"><% end %>
+            <%= row[:vals][col] %>
+            <% if row[:links][col] %></a><% end %>
+            </td>
+        <% end %>
+    </tr>
+    <% end %>
+</table>
+<form style="display: inline-block;">
+    <% params.each do |k, v| %>
+    <input type="hidden" name="<%= k %>" value="<%= v %>">
+    <% end %>
+    <input type="hidden" name="csv" value="yes">
+    <input type="submit" value="Download CSV">
+</form>
+<em>To import into Excel, paste the page URL into 'Import for Web' on the Data tab</em>
