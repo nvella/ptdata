@@ -30,7 +30,7 @@ module PTSheets::Tables
       })
 
       return PTSheets::Table.new(
-        "#{data['stops'][stop_id]['stop_name']} Departures for #{date}",
+        "#{data['stops'][stop_id.to_s]['stop_name']} Departures for #{date}",
         SCHEMA.keys,
         data['departures']
           .filter {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == date}
@@ -46,9 +46,9 @@ module PTSheets::Tables
                 #  DateTime.parse(departure["estimated_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y/%m/%d %H:%M:%S") : nil,
               }),
               links: {
-                'route_id' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
-                'route_name' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
-                'route_number' => "/q/stops?route_type_id=#{route_type_id}&stop_id=#{departure['route_id']}",
+                'route_id' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
+                'route_name' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
+                'route_number' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
               }
             }
           end

@@ -9,7 +9,7 @@
             <div class="header">
                 <h1 style="display: inline; padding-right: 10px;">PTSheets</h1>
                 <span><a href="/">[Home]</a> | Routes: </span>
-                <% PTSheets::ROUTE_TYPES.map do |k, v| %><a href="/routes/<%=v%>">[<%=k%>]</a> <% end %>
+                <% PTSheets::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type_id=<%=v%>">[<%=k%>]</a> <% end %>
                 <span>| <a href="/about">[About/Contact]</a></span>
                 <hr/>
             </div>
