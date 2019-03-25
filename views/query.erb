@@ -1,6 +1,6 @@
 <div class="header">
     <h4><%= query.title %></h4>
-    <h1><%= result.title %></h1>
+    <%  if defined? result %><h1><%= result.title %></h1><% end %>
 </div>
 
 <% unless query.params.empty? %>
@@ -21,7 +21,7 @@
             <%
         else
             %>
-        <input type="<%= v[:type] %>" name="<%= k %>" value="<%= query_params[k] %>">
+        <input type="<%= v[:type] %>" name="<%= k %>" value="<%= query_params[k] if defined? query_params %>">
             <%
         end
         %>
@@ -30,6 +30,14 @@
     <input type="submit" value="Submit">    
 </form>
 <% end %>
+
+<% if defined? query_error %>
+
+<hr>
+<em><h3>Query Error</h3></em>
+<p><%= query_error.message %></p>
+
+<% else %>
 
 <table class="display compact data-table" id="table">
     <thead>
@@ -70,3 +78,5 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<% end %>

@@ -43,7 +43,7 @@ module PTData
       id: 'routes',
       title: 'Routes by Route Type',
       params: {
-        route_type_id: {label: 'Route Type ID', type: :number}
+        route_type_id: {label: 'Route Type ID', type: :number, required: true}
       }
     ) do |params|
       Tables::Routes.get(params[:route_type_id])
@@ -53,8 +53,8 @@ module PTData
       id: 'stops',
       title: 'Stops by Route Type and ID',
       params: {
-        route_type_id: {label: 'Route Type ID', type: :number},
-        route_id: {label: 'Route ID', type: :number}
+        route_type_id: {label: 'Route Type ID', type: :number, required: true},
+        route_id: {label: 'Route ID', type: :number, required: true}
       },
     ) do |params|
       Tables::Stops.get(params[:route_type_id], params[:route_id])
@@ -64,8 +64,8 @@ module PTData
       id: 'departures',
       title: 'Departures by Route Type, Stop ID and Date',
       params: {
-        route_type_id: {label: 'Route Type ID', type: :number},
-        stop_id: {label: 'Stop ID', type: :number},
+        route_type_id: {label: 'Route Type ID', type: :number, required: true},
+        stop_id: {label: 'Stop ID', type: :number, required: true},
         date: {label: 'Date', type: :date}
       }
     ) do |params|
@@ -76,8 +76,8 @@ module PTData
       id: 'patterns',
       title: 'Pattern by Route Type and Run ID',
       params: {
-        route_type_id: {label: 'Route Type ID', type: :number},
-        run_id: {label: 'Run ID', type: :number},
+        route_type_id: {label: 'Route Type ID', type: :number, required: true},
+        run_id: {label: 'Run ID', type: :number, required: true},
       }
     ) do |params|
       PTData::Tables::Patterns.get(params[:route_type_id], params[:run_id])
@@ -98,8 +98,16 @@ module PTData
       halt 404 if !@@queries.has_key? params[:_id]
 
       query = @@queries[params[:_id]]
-      query_params = query.format_params(params)
-      p query_params
+      query_params = begin
+        query.format_params(params)
+      rescue QueryParameterError => e
+        status 400
+        return erb(:query, layout: :layout, locals: {
+          query: query,
+          query_error: e
+        });
+      end
+      
       result = query.execute(query_params)
 
       erb(:query, layout: :layout, locals: {
