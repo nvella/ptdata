@@ -1,3 +1,5 @@
+require 'csv'
+
 module PTData
   class Table
     attr_accessor :title, :cols, :rows
@@ -9,7 +11,12 @@ module PTData
     end
   
     def to_csv
-  
+      CSV.generate do |csv|
+        csv << @cols
+        @rows.each do |row| 
+          csv << @cols.map {|k| row[:vals][k]}
+        end
+      end
     end
 
     def keys; @cols; end

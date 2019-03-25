@@ -110,6 +110,12 @@ module PTData
       
       result = query.execute(query_params)
 
+      # CSV download
+      if params[:csv] == 'yes'
+        attachment "PTData_#{params[:_id]}_#{result.title.gsub(/[^a-z0-9]/i, '_')}.csv"
+        return result.to_csv
+      end
+
       erb(:query, layout: :layout, locals: {
         query: query,
         query_params: query_params,
