@@ -49,6 +49,7 @@ module PTSheets::Tables
                 'route_id' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
                 'route_name' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
                 'route_number' => "/q/routes?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
+                'run_id' => "/q/patterns?route_type_id=#{route_type_id}&run_id=#{departure['run_id']}"
               }
             }
           end
