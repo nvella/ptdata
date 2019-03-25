@@ -34,7 +34,9 @@ module PTData
     end
     
     get '/' do
-      erb(:index, layout: :layout)
+      erb(:index, layout: :layout, locals: {
+        queries: @@queries.map {|k, v| ["/q/#{k}", v.title]}
+      })
     end
 
     query(
@@ -107,9 +109,9 @@ module PTData
       })
     end
     
-    get '/about' do
-      erb(:about, layout: :layout)
-    end
+    # get '/about' do
+    #   erb(:about, layout: :layout)
+    # end
   end
 end
 

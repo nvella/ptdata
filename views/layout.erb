@@ -13,14 +13,13 @@
                 <h1 style="display: inline; padding-right: 10px;">PTData</h1>
                 <span><a href="/">[Home]</a> | Routes: </span>
                 <% PTData::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type_id=<%=v%>">[<%=k%>]</a> <% end %>
-                <span>| <a href="/about">[About/Contact]</a></span>
                 <hr/>
             </div>
             <div class="container">
                 <%= yield %>
             </div>
             <hr/>
-            <p>PTData Copyright (c) 2019 Nick Vella, licensed under MIT - <a href="https://github.com/nvella/ptdata">https://github.com/nvella/ptdata</a> - feedback: nick at nxk dot io<br/>All data copyright PTV</p>
+            <p>PTData Copyright (c) 2019 Nick Vella, licensed under MIT - <a href="https://github.com/nvella/ptdata">https://github.com/nvella/ptdata</a> - feedback: nick at nxk dot io<br/>All data copyright PTV. PTData is not in any way affiliated with PTV.</p>
         </div>
     </body>
 </html>

@@ -1,2 +1,36 @@
-<h2>Welcome to PTData</h2>
-<p>Here you can access data from the PTV API in a tabular format. Useful for analysing transport routes and timetables in spreadsheet applications.</p>
+<div class="home-row">
+  <div class="home-column">
+    <h1>Quick Links</h1>
+    <h2>Routes</h2>
+    <ul>
+    <% PTData::ROUTE_TYPES.map do |k, v| %><li><a href="/q/routes?route_type_id=<%=v%>"><%=k%></a></li><% end %>
+    </ul>
+  </div>
+  <div class="home-column">
+    <h1>Queries</h1>
+    <ul>
+    <% queries.each do |link, title| %>
+      <li><a href="<%= link %>"><%= title %></a></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="home-column">
+    <h1>About and News</h1>
+    <h2>Welcome to PTData</h2>
+    <p>PTData collects raw data from the PTV API and presents it in a tabular format. 
+      Using this tool you can browse the stops, routes and patterns of the Victorian
+      Public Transport network, as well as being able to export the data into various formats
+       and applications for further analysis</p>
+    <p>As it presently stands, the site can only view data directly from the PTV API. It is
+      eventually planned for the implementation of recording of historical data and the
+      proper handling of real-time data. Real-time data is presently not displayed as this site
+      is heavily cached as to alleviate load on the PTV API.</p>
+    <p>If you have any feedback on the site, feel free to <a href="#" onclick="alert('email: nick at nxk dot io')">shoot me an email</a> 
+      or <a href="https://github.com/nvella/ptdata">leave an issue on Github</a>. This site is open-source; pull requests are welcome. If you
+      wish to support my hobbyist efforts directly, you can <a href="https://paypal.me/nickvella0">donate to me via PayPal</a>.</p>
+    
+    <hr>
+    <h2>PTData updates (from blog)</h2>
+    <iframe src="http://blog.nxk.io/search/label/ptdata?m=1" style="width: 100%; height: 400px;"></iframe>
+  </div>
+</div>

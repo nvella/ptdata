@@ -23,3 +23,39 @@ body {
 .container > .header > h1, h4 {
     margin: 0px;
 }
+
+.home-column {
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-left: 5px;
+    margin-right: 5px; 
+    padding: 5px;
+}
+
+.home-column > h1 {
+    font-size: 11pt;
+    border-bottom: solid 1px black;
+    padding-bottom: 4px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.home-column > h2 {
+    font-size: 11pt;
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.home-column > ul {
+    margin: 0;
+}
+
+iframe {
+    border: none;
+}
+
+.home-row {
+    display: flex;
+
+}
