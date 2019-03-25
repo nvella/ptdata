@@ -28,12 +28,15 @@
 </form>
 <% end %>
 
-<table class="data-table">
-    <tr>
-        <% result.cols.each do |col| %>
-        <th><%= col %></td>
-        <% end %>
-    </th>
+<table class="display compact data-table" id="table">
+    <thead>
+        <tr>
+            <% result.cols.each do |col| %>
+            <th><%= col %></td>
+            <% end %>
+        </th>
+    </thead>
+    <tbody>
     <% result.rows.each do |row| %>
     <tr>
         <% result.cols.each do |col| %>
@@ -45,6 +48,7 @@
         <% end %>
     </tr>
     <% end %>
+    </tbody>
 </table>
 <form style="display: inline-block;">
     <% params.each do |k, v| %>
@@ -54,3 +58,12 @@
     <input type="submit" value="Download CSV">
 </form>
 <em>To connect to this query from Excel, paste the page URL into 'Import for Web' on the Data tab</em>
+<script>
+$(document).ready(function() {
+    $('#table').DataTable({
+        pageLength: 50,
+        order: [],
+        lengthMenu: [50, 100, 200, 500]
+    });
+});
+</script>
