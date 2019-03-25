@@ -6,24 +6,19 @@ body {
     margin-bottom: 10px;
 }
 
-/* table {
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-} */
-
-/* th {
-    background-color: black;
-    color: white;
-
-} */
-/* 
-table, th, td {
-    padding: 2px 5px;
-} */
-
 .params {
     margin-bottom: 10px;
+}
+
+.container > .header {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.container > .header > h4 {
+    color: grey;
+}
+
+.container > .header > h1, h4 {
+    margin: 0px;
 }
