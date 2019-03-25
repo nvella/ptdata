@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PTSheets</title>
+        <title>PTData</title>
         <link rel="stylesheet" href="/styles.css" type="text/css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -10,9 +10,9 @@
     <body>
         <div class="box">
             <div class="header">
-                <h1 style="display: inline; padding-right: 10px;">PTSheets</h1>
+                <h1 style="display: inline; padding-right: 10px;">PTData</h1>
                 <span><a href="/">[Home]</a> | Routes: </span>
-                <% PTSheets::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type_id=<%=v%>">[<%=k%>]</a> <% end %>
+                <% PTData::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type_id=<%=v%>">[<%=k%>]</a> <% end %>
                 <span>| <a href="/about">[About/Contact]</a></span>
                 <hr/>
             </div>
@@ -20,7 +20,7 @@
                 <%= yield %>
             </div>
             <hr/>
-            <p>PTSheets Copyright (c) 2019 Nick Vella, licensed under MIT - <a href="https://github.com/nvella/ptsheets">https://github.com/nvella/ptsheets</a> - feedback: nick at nxk dot io<br/>All data copyright PTV</p>
+            <p>PTData Copyright (c) 2019 Nick Vella, licensed under MIT - <a href="https://github.com/nvella/ptdata">https://github.com/nvella/ptdata</a> - feedback: nick at nxk dot io<br/>All data copyright PTV</p>
         </div>
     </body>
 </html>

@@ -9,7 +9,7 @@ require_relative './tables/stops'
 require_relative './tables/departures'
 require_relative './tables/patterns'
 
-module PTSheets
+module PTData
   PTV = RubyPtv::Client.new(dev_id: ENV['PTV_ID'], secret_key: ENV['PTV_SECRET'])
   ROUTE_TYPES = {
     'Train' => 0,
@@ -67,7 +67,7 @@ module PTSheets
         date: {label: 'Date', type: :date}
       }
     ) do |params|
-      PTSheets::Tables::Departures.get(params[:route_type_id], params[:stop_id], params[:date])
+      PTData::Tables::Departures.get(params[:route_type_id], params[:stop_id], params[:date])
     end
 
     query(
@@ -78,11 +78,11 @@ module PTSheets
         run_id: {label: 'Run ID', type: :number},
       }
     ) do |params|
-      PTSheets::Tables::Patterns.get(params[:route_type_id], params[:run_id])
+      PTData::Tables::Patterns.get(params[:route_type_id], params[:run_id])
     end
    
     # erb(:table, layout: :layout, locals: {
-    #   table: PTSheets::Tables::Departures.get(params[:route_type_id], params[:stop_id], date),
+    #   table: PTData::Tables::Departures.get(params[:route_type_id], params[:stop_id], date),
     #   query_params: {
     #     date: {
     #       label: 'Date (yyyy-mm-dd format)',

@@ -1,8 +1,8 @@
 require 'date'
 require_relative '../table'
 
-module PTSheets::Tables
-  class Departures < PTSheets::Table
+module PTData::Tables
+  class Departures < PTData::Table
     SCHEMA = {
       "stop_id" => 0,
       "route_id" => 0,
@@ -22,14 +22,14 @@ module PTSheets::Tables
     }
 
     def self.get(route_type_id, stop_id, date = Date.today)
-      data = PTSheets::PTV.departures(route_type_id, stop_id, {
+      data = PTData::PTV.departures(route_type_id, stop_id, {
         max_results: 1000,
         date_utc: date.to_time.getutc.to_datetime.iso8601,
         include_cancelled: true,
         expand: "[stop,direction,route]"
       })
 
-      return PTSheets::Table.new(
+      return PTData::Table.new(
         "#{data['stops'][stop_id.to_s]['stop_name']} Departures for #{date}",
         SCHEMA.keys,
         data['departures']

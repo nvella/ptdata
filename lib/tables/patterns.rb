@@ -1,7 +1,7 @@
 require_relative '../table'
 
-module PTSheets::Tables
-  class Patterns < PTSheets::Table
+module PTData::Tables
+  class Patterns < PTData::Table
     SCHEMA = {
       "stop_id" => 0,
       "stop_suburb" => "",
@@ -18,11 +18,11 @@ module PTSheets::Tables
     }
 
     def self.get(route_type_id, run_id)
-      pattern = PTSheets::PTV.pattern(run_id, route_type_id, {
+      pattern = PTData::PTV.pattern(run_id, route_type_id, {
         expand: 'all'
       })
 
-      PTSheets::Table.new(
+      PTData::Table.new(
         "",
         SCHEMA.keys,
         pattern['departures'].map do |departure|

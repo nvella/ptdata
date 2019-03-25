@@ -1,4 +1,4 @@
-module PTSheets
+module PTData
   class Table
     attr_accessor :title, :cols, :rows
   

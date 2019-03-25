@@ -1,7 +1,7 @@
 require_relative '../table'
 
-module PTSheets::Tables
-  class Stops < PTSheets::Table
+module PTData::Tables
+  class Stops < PTData::Table
     SCHEMA = {
       "stop_suburb" => "string",
       "stop_name" => "string",
@@ -14,9 +14,9 @@ module PTSheets::Tables
 
     def self.get(route_type_id, route_id)
       self.new(
-        "#{PTSheets::ROUTE_TYPES.select {|k,v| v == route_type_id.to_i}.first[0]} Route ID #{route_id} Stops",
+        "#{PTData::ROUTE_TYPES.select {|k,v| v == route_type_id.to_i}.first[0]} Route ID #{route_id} Stops",
         SCHEMA.keys,
-        PTSheets::PTV.stops_for_route(route_id, route_type_id).map do |stop|
+        PTData::PTV.stops_for_route(route_id, route_type_id).map do |stop|
           {
             vals: stop,
             links: {

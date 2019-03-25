@@ -1,6 +1,6 @@
 require 'date'
 
-module PTSheets
+module PTData
   class Query
     attr_reader :title, :params
 
