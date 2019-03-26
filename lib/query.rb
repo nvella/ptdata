@@ -2,23 +2,35 @@ require 'date'
 
 module PTData
   class Query
-    attr_reader :title, :params
+    class << self
+      def id(id); @id = id; end
+      def title(title); @title = title; end
+      def schema(schema); @schema = schema; end
 
-    def initialize(app, params, executor)
-      @app = app
-      @title = params[:title]
-      @params = params[:params]
-      @executor = executor
+      def input_param(key, val)
+        @input_params ||= {} 
+        @input_params[key] = val
+      end
     end
 
+    def initialize(app)
+      @app = app
+    end
+
+    # Class variable readers
+    def id; self.class.instance_variable_get :@id; end 
+    def title; self.class.instance_variable_get :@title; end
+    def input_params; self.class.instance_variable_get :@input_params; end
+    def schema; self.class.instance_variable_get :@schema; end
+
     def format_params(input)
-      missing_parameters = @params.select {|k, props| props[:required] && !input.has_key?(k)}
+      missing_parameters = input_params.select {|k, props| props[:required] && !input.has_key?(k)}
       if !missing_parameters.empty?
         raise QueryParameterError, "The following required parameters are missing from your query: " +
         "#{missing_parameters.map {|k, props| props[:label]}.join(', ').chomp(', ')}.";
       end
 
-      @params.map do |k, props|
+      input_params.map do |k, props|
         [
           k,
           case props[:type]
@@ -31,7 +43,7 @@ module PTData
       end.to_h
     end
 
-    def execute(params); @executor.call(params); end
+    def execute(params); nil; end
   end
 
   class QueryParameterError < Exception
