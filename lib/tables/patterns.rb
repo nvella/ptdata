@@ -18,8 +18,8 @@ module PTData::Tables
       "departure_sequence" => 0,
     }
 
-    def self.get(route_type_id, run_id)
-      pattern = PTData::PTV.pattern(run_id, route_type_id, {
+    def self.get(route_type, run_id)
+      pattern = PTData::PTV.pattern(run_id, route_type, {
         expand: 'all'
       })
       first_stop = pattern['stops'][pattern['departures'].first['stop_id'].to_s]['stop_name']
@@ -37,10 +37,10 @@ module PTData::Tables
               'scheduled_departure_human' => DateTime.parse(departure["scheduled_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             }),
             links: {
-              'stop_id' => "/q/departures?route_type_id=#{route_type_id}&stop_id=#{departure['stop_id']}",
-              'stop_name' => "/q/departures?route_type_id=#{route_type_id}&stop_id=#{departure['stop_id']}",
-              'route_id' => "/q/stops?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
-              'route_name' => "/q/stops?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}"
+              'stop_id' => "/q/departures?route_type=#{route_type}&stop_id=#{departure['stop_id']}",
+              'stop_name' => "/q/departures?route_type=#{route_type}&stop_id=#{departure['stop_id']}",
+              'route_id' => "/q/stops?route_type=#{route_type}&route_id=#{departure['route_id']}",
+              'route_name' => "/q/stops?route_type=#{route_type}&route_id=#{departure['route_id']}"
             }
           }
         end

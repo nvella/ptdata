@@ -12,7 +12,7 @@
             <div class="header">
                 <h1 style="display: inline; padding-right: 10px;">PTData</h1>
                 <span><a href="/">[Home]</a> | Routes: </span>
-                <% PTData::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type_id=<%=v%>">[<%=k%>]</a> <% end %>
+                <% PTData::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type=<%=v%>">[<%=k%>]</a> <% end %>
                 <hr/>
             </div>
             <div class="container">

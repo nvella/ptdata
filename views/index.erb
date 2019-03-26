@@ -3,7 +3,7 @@
     <h1>Quick Links</h1>
     <h2>Routes</h2>
     <ul>
-    <% PTData::ROUTE_TYPES.map do |k, v| %><li><a href="/q/routes?route_type_id=<%=v%>"><%=k%></a></li><% end %>
+    <% PTData::ROUTE_TYPES.map do |k, v| %><li><a href="/q/routes?route_type=<%=v%>"><%=k%></a></li><% end %>
     </ul>
   </div>
   <div class="home-column">

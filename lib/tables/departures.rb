@@ -21,8 +21,8 @@ module PTData::Tables
       "departure_sequence" => 0
     }
 
-    def self.get(route_type_id, stop_id, date = Date.today)
-      data = PTData::PTV.departures(route_type_id, stop_id, {
+    def self.get(route_type, stop_id, date = Date.today)
+      data = PTData::PTV.departures(route_type, stop_id, {
         max_results: 1000,
         date_utc: date.to_time.getutc.to_datetime.iso8601,
         include_cancelled: true,
@@ -46,10 +46,10 @@ module PTData::Tables
                 #  DateTime.parse(departure["estimated_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y/%m/%d %H:%M:%S") : nil,
               }),
               links: {
-                'route_id' => "/q/stops?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
-                'route_name' => "/q/stops?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
-                'route_number' => "/q/stops?route_type_id=#{route_type_id}&route_id=#{departure['route_id']}",
-                'run_id' => "/q/patterns?route_type_id=#{route_type_id}&run_id=#{departure['run_id']}"
+                'route_id' => "/q/stops?route_type=#{route_type}&route_id=#{departure['route_id']}",
+                'route_name' => "/q/stops?route_type=#{route_type}&route_id=#{departure['route_id']}",
+                'route_number' => "/q/stops?route_type=#{route_type}&route_id=#{departure['route_id']}",
+                'run_id' => "/q/patterns?route_type=#{route_type}&run_id=#{departure['run_id']}"
               }
             }
           end
