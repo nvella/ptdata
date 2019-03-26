@@ -45,61 +45,6 @@ module PTData
       })
     end
 
-    # query(
-    #   id: 'routes',
-    #   title: 'Routes by Route Type',
-    #   params: {
-    #     route_type: {label: 'Route Type', type: :number, required: true}
-    #   }
-    # ) do |params|
-    #   Tables::Routes.get(params[:route_type])
-    # end
-
-    # query(
-    #   id: 'stops',
-    #   title: 'Stops by Route Type and ID',
-    #   params: {
-    #     route_type: {label: 'Route Type', type: :number, required: true},
-    #     route_id: {label: 'Route ID', type: :number, required: true}
-    #   },
-    # ) do |params|
-    #   Tables::Stops.get(params[:route_type], params[:route_id])
-    # end
-
-    # query(
-    #   id: 'departures',
-    #   title: 'Departures by Route Type, Stop ID and Date',
-    #   params: {
-    #     route_type: {label: 'Route Type', type: :number, required: true},
-    #     stop_id: {label: 'Stop ID', type: :number, required: true},
-    #     date: {label: 'Date', type: :date}
-    #   }
-    # ) do |params|
-    #   PTData::Queries::Departures.get(params[:route_type], params[:stop_id], params[:date])
-    # end
-
-    # query(
-    #   id: 'patterns',
-    #   title: 'Pattern by Route Type and Run ID',
-    #   params: {
-    #     route_type: {label: 'Route Type', type: :number, required: true},
-    #     run_id: {label: 'Run ID', type: :number, required: true},
-    #   }
-    # ) do |params|
-    #   PTData::Queries::Patterns.get(params[:route_type], params[:run_id])
-    # end
-   
-    # erb(:table, layout: :layout, locals: {
-    #   table: PTData::Queries::Departures.get(params[:route_type], params[:stop_id], date),
-    #   query_params: {
-    #     date: {
-    #       label: 'Date (yyyy-mm-dd format)',
-    #       val: date.iso8601,
-    #       type: :input
-    #     }
-    #   }
-    # })
-
     get '/q/:_id' do
       query_key = params[:_id].to_sym
       halt 404 if @queries.dig(query_key).nil?
