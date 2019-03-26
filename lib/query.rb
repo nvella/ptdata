@@ -5,7 +5,6 @@ module PTData
     class << self
       def id(id); @id = id; end
       def title(title); @title = title; end
-      def schema(schema); @schema = schema; end
 
       def input_param(key, val)
         @input_params ||= {} 
@@ -21,7 +20,6 @@ module PTData
     def id; self.class.instance_variable_get :@id; end 
     def title; self.class.instance_variable_get :@title; end
     def input_params; self.class.instance_variable_get :@input_params; end
-    def schema; self.class.instance_variable_get :@schema; end
 
     def format_params(input)
       missing_parameters = input_params.select {|k, props| props[:required] && !input.has_key?(k)}

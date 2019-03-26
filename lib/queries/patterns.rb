@@ -8,7 +8,7 @@ module PTData::Queries
     input_param :route_type, label: 'Route Type', type: :number, required: true
     input_param :run_id, label: 'Run ID', type: :number, required: true
 
-    schema \
+    SCHEMA = {
       "stop_id" => 0,
       "stop_name" => "",
       "stop_suburb" => "",
@@ -22,6 +22,7 @@ module PTData::Queries
       "platform_number" => "string",
       "flags" => "string",
       "departure_sequence" => 0
+    }
 
     def execute(params) 
       pattern = PTData::PTV.pattern(params[:run_id], params[:route_type], {
@@ -32,7 +33,7 @@ module PTData::Queries
 
       PTData::Table.new(
         "Run #{params[:run_id]} from #{first_stop} to #{last_stop}",
-        schema.keys,
+        SCHEMA.keys,
         pattern['departures'].map do |departure|
           {
             vals: departure.merge({

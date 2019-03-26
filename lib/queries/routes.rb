@@ -7,17 +7,18 @@ module PTData::Queries
 
     input_param :route_type, label: 'Route Type', type: :number, required: true
 
-    schema \
+    SCHEMA = {
       "route_type" => 0,
       "route_id" => 0,
       "route_number" => "string",
       "route_name" => "string",
       "route_gtfs_id" => "string"
+    }
 
     def execute(params)
       PTData::Table.new(
         "#{PTData::ROUTE_TYPES.select {|k,v| v == params[:route_type]}.first[0]} Routes",
-        schema.keys,
+        SCHEMA.keys,
         PTData::PTV.routes(route_types: [params[:route_type]]).map do |route|
           {
             vals: route,

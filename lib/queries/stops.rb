@@ -8,7 +8,7 @@ module PTData::Queries
     input_param :route_type, label: 'Route Type', type: :number, required: true
     input_param :route_id, label: 'Route ID', type: :number, required: true
 
-    schema \
+    SCHEMA = {
       "stop_suburb" => "string",
       "stop_name" => "string",
       "stop_id" => 0,
@@ -16,11 +16,12 @@ module PTData::Queries
       "stop_latitude" => 0,
       "stop_longitude" => 0,
       "stop_sequence" => 0
+    }
 
     def execute(params)
       PTData::Table.new(
         "#{PTData::ROUTE_TYPES.select {|k,v| v == params[:route_type].to_i}.first[0]} Route ID #{params[:route_id]} Stops",
-        schema.keys,
+        SCHEMA.keys,
         PTData::PTV.stops_for_route(params[:route_id], params[:route_type]).map do |stop|
           {
             vals: stop,

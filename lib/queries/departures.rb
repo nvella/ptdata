@@ -10,7 +10,7 @@ module PTData::Queries
     input_param :stop_id, label: 'Stop ID', type: :number, required: true
     input_param :date, label: 'Date', type: :date
 
-    schema \
+    SCHEMA = {
       "stop_id" => 0,
       "route_id" => 0,
       "route_number" => 0,
@@ -26,6 +26,7 @@ module PTData::Queries
       "platform_number" => "string",
       "flags" => "string",
       "departure_sequence" => 0
+    }
 
     def execute(params)
       data = PTData::PTV.departures(params[:route_type], params[:stop_id], {
@@ -37,7 +38,7 @@ module PTData::Queries
 
       return PTData::Table.new(
         "#{data['stops'][params[:stop_id].to_s]['stop_name']} Departures for #{params[:date]}",
-        schema.keys,
+        SCHEMA.keys,
         data['departures']
           .filter {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == params[:date]}
           .sort_by {|d| DateTime.parse(d["scheduled_departure_utc"])}
