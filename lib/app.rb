@@ -9,6 +9,7 @@ require_relative './queries/routes'
 require_relative './queries/stops'
 require_relative './queries/departures'
 require_relative './queries/patterns'
+require_relative './queries/timetables'
 
 module PTData
   PTV = RubyPtv::Client.new(dev_id: ENV['PTV_ID'], secret_key: ENV['PTV_SECRET'])
@@ -31,6 +32,7 @@ module PTData
       register_query Queries::Stops
       register_query Queries::Departures
       register_query Queries::Patterns
+      register_query Queries::Timetables
     end
 
     def register_query query_class

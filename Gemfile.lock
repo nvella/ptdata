@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/nvella/ruby-ptv-api
-  revision: 8c4e40e8fba070c107cb8c4881b2b680a3a89c47
+  revision: eeddcbab2d9ab2447b4bd885c166e5b46e66f153
   specs:
     ruby_ptv (0.1.1)
       httparty (~> 0.16.4)
