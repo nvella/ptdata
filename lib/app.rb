@@ -32,7 +32,6 @@ module PTData
       register_query Queries::Stops
       register_query Queries::Departures
       register_query Queries::Patterns
-      register_query Queries::Timetables
     end
 
     def register_query query_class
