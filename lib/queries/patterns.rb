@@ -43,10 +43,10 @@ module PTData::Queries
               'scheduled_departure_human' => DateTime.parse(departure["scheduled_departure_utc"]).to_time.localtime.to_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             }),
             links: {
-              'stop_id' => "/q/departures?route_type=#{params[:route_type]}&stop_id=#{departure['stop_id']}",
-              'stop_name' => "/q/departures?route_type=#{params[:route_type]}&stop_id=#{departure['stop_id']}",
-              'route_id' => "/q/stops?route_type=#{params[:route_type]}&route_id=#{departure['route_id']}",
-              'route_name' => "/q/stops?route_type=#{params[:route_type]}&route_id=#{departure['route_id']}"
+              'stop_id' => @app.lq(:departures, route_type: params[:route_type], stop_id: departure['stop_id']),
+              'stop_name' => @app.lq(:departures, route_type: params[:route_type], stop_id: departure['stop_id']),
+              'route_id' => @app.lq(:stops, route_type: params[:route_type], route_id: departure['route_id']), 
+              'route_name' => @app.lq(:stops, route_type: params[:route_type], route_id: departure['route_id'])
             }
           }
         end

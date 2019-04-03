@@ -26,8 +26,8 @@ module PTData::Queries
           {
             vals: stop,
             links: {
-              'stop_id' => "/q/departures?route_type=#{params[:route_type]}&stop_id=#{stop['stop_id']}",
-              'stop_name' => "/q/departures?route_type=#{params[:route_type]}&stop_id=#{stop['stop_id']}"
+              'stop_id' => @app.lq(:departures, route_type: params[:route_type], stop_id: stop['stop_id']),
+              'stop_name' => @app.lq(:departures, route_type: params[:route_type], stop_id: stop['stop_id'])
             }
           }
         end

@@ -40,6 +40,11 @@ module PTData
       @queries[query.id] = query
     end
 
+    # Link query
+    def lq(query_id, params)
+      "/q/#{query_id}?#{URI.encode_www_form(params)}"
+    end
+
     get '/' do
       erb(:index, layout: :layout, locals: {
         queries: @queries.to_h.map {|k, v| ["/q/#{k}", v.title]}
