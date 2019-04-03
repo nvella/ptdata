@@ -20,6 +20,16 @@ module PTData
     'Regional Train/Coach' => 3,
     'Night Bus' => 4
   }
+  COMMON_STATIONS = {
+    1071 => 'Flinders Street Station',
+    1181 => 'Southern Cross',
+    1068 => 'Flagstaff',
+    1120 => 'Melbourne Central',
+    1155 => 'Parliament',
+    1162 => 'Richmond',
+    1104 => 'Jolimont',
+    1144 => 'North Melbourne'
+  }
 
   class App < Sinatra::Application
     attr_reader :queries

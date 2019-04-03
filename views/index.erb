@@ -3,7 +3,14 @@
     <h1>Quick Links</h1>
     <h2>Routes</h2>
     <ul>
-    <% PTData::ROUTE_TYPES.map do |k, v| %><li><a href="/q/routes?route_type=<%=v%>"><%=k%></a></li><% end %>
+    <% PTData::ROUTE_TYPES.map do |k, v| %><li><a href="<%= lq(:routes, route_type: v) %>"><%=k%></a></li><% end %>
+    </ul>
+    <br>
+    <h2>Main train station departures</h2>
+    <ul>
+    <% PTData::COMMON_STATIONS.map do |k, v| %>
+      <li><a href="<%= lq(:departures, route_type: 0, stop_id: k) %>"><%= v %></a></li>
+    <% end %>
     </ul>
   </div>
   <div class="home-column">
