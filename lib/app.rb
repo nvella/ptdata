@@ -10,6 +10,7 @@ require_relative './queries/stops'
 require_relative './queries/departures'
 require_relative './queries/patterns'
 require_relative './queries/timetables'
+require_relative './queries/search'
 
 module PTData
   PTV = RubyPtv::Client.new(dev_id: ENV['PTV_ID'], secret_key: ENV['PTV_SECRET'])
@@ -42,6 +43,11 @@ module PTData
       register_query Queries::Stops
       register_query Queries::Departures
       register_query Queries::Patterns
+      
+      register_query Queries::StopsSearch
+      register_query Queries::RoutesSearch
+      register_query Queries::OutletsSearch
+
     end
 
     def register_query query_class
@@ -53,6 +59,10 @@ module PTData
     # Link query
     def lq(query_id, params)
       "/q/#{query_id}?#{URI.encode_www_form(params)}"
+    end
+
+    def route_type_human(route_type)
+      ROUTE_TYPES.select {|k, v| v == route_type}.map {|k,v| k}.first
     end
 
     get '/' do
@@ -89,6 +99,21 @@ module PTData
         query_params: query_params,
         result: result
       })
+    end
+
+    get '/search' do
+      query_id = case params[:what]
+      when 'stops'
+        :stop_search
+      when 'routes'
+        :route_search
+      when 'outlets'
+        :outlet_search
+      else
+        throw 'invalid search query type'
+      end
+
+      query_id.to_s
     end
     
     # get '/about' do
