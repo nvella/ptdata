@@ -32,6 +32,10 @@ module PTData
         [
           k,
           case props[:type]
+          when :text
+            input[k].to_s
+          when :bool
+            input[k] == 'true'
           when :number
             input[k].to_i
           when :date

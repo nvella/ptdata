@@ -9,22 +9,18 @@
     <% query.input_params.each do |k, v| %>
     <span class="params-param">
         <span><%= v[:label] %></span>
-        <%
-        case v[:type]
-        when :select
-            %>
+        <% case v[:type]
+        when :select %>
         <select name="<%= k %>">
             <% v[:options].each do |opt, v| %>
             <option value="<%= opt %>" <% if params[k] == opt %>selected<%end%>><%= v %></option>
             <% end %>
         </select>
-            <%
-        else
-            %>
+        <% when :bool %>
+        <input type="checkbox" name="<%= k %>" value="true" <% if defined?(query_params) && query_params[k] %>checked<% end %>>
+        <% else %>
         <input type="<%= v[:type] %>" name="<%= k %>" value="<%= query_params[k] if defined? query_params %>">
-            <%
-        end
-        %>
+        <% end %>
     </span>
     <% end %>
     <input type="submit" value="Submit">    
