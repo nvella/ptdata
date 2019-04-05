@@ -39,9 +39,9 @@
     <thead>
         <tr>
             <% result.cols.each do |col| %>
-            <th><%= col %></td>
+            <th><%= col %></th>
             <% end %>
-        </th>
+        </tr>
     </thead>
     <tbody>
     <% result.rows.each do |row| %>
@@ -57,6 +57,7 @@
     <% end %>
     </tbody>
 </table>
+
 <form style="display: inline-block;">
     <% params.each do |k, v| %>
     <input type="hidden" name="<%= k %>" value="<%= v %>">
@@ -64,6 +65,7 @@
     <input type="hidden" name="csv" value="yes">
     <input type="submit" value="Download CSV">
 </form>
+
 <script>
 $(document).ready(function() {
     $('#table').DataTable({
