@@ -40,7 +40,7 @@ module PTData::Queries
         "#{data['stops'][params[:stop_id].to_s]['stop_name']} Departures for #{params[:date]}",
         SCHEMA.keys,
         data['departures']
-          .filter {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == params[:date]}
+          .select {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == params[:date]}
           .sort_by {|d| DateTime.parse(d["scheduled_departure_utc"])}
           .map do |departure|
             {

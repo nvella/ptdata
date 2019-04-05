@@ -24,7 +24,7 @@ module PTData::Queries
             max_results: 1000,
             date_utc: params[:date].to_time.getutc.to_datetime.iso8601,
             include_cancelled: true
-          })['departures'].filter {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == params[:date]}
+          })['departures'].select {|d| DateTime.parse(d['scheduled_departure_utc']).to_time.localtime.to_date == params[:date]}
         ]
       end.to_h
       # Collect patterns from unique run ids
@@ -51,10 +51,10 @@ module PTData::Queries
               'stop_name' => stop['stop_name'],
             }.merge(
               patterns.map do |run_id, pattern|
-                [run_id, pattern['departures'].filter do |departure|
+                [run_id, pattern['departures'].select do |departure|
                   departure['stop_id'] == stop['stop_id']
                 end.first]
-              end.filter {|run_id, v| !v.nil?}.map do |run_id, departure|
+              end.select {|run_id, v| !v.nil?}.map do |run_id, departure|
                [run_id.to_s, DateTime.parse(departure["scheduled_departure_utc"]).to_time.localtime.strftime("%H.%M")]
               end.to_h
             ),
