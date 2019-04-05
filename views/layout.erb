@@ -13,6 +13,19 @@
                 <h1 style="display: inline; padding-right: 10px;">PTData</h1>
                 <span><a href="/">[Home]</a> | Routes: </span>
                 <% PTData::ROUTE_TYPES.map do |k, v| %><a href="/q/routes?route_type=<%=v%>">[<%=k%>]</a> <% end %>
+                
+                <span class="right">
+                    <span>Search </span>
+                    <form action="/search">
+                        <select name="what">
+                            <option value="stops">Stops</option>
+                            <option value="routes">Routes</option>
+                            <option value="outlets">Outlets</option>
+                        </select>
+                        <input name="query" />
+                        <input type="submit" value="Go">
+                    </form>
+                </span>
                 <hr/>
             </div>
             <div class="container">
