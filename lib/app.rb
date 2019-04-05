@@ -106,7 +106,7 @@ module PTData
       when 'stops'
         :stops_search
       when 'routes'
-        :roues_search
+        :routes_search
       when 'outlets'
         :outlets_search
       else
