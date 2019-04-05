@@ -16,7 +16,7 @@ module PTData::Queries
       end
 
       PTData::Table.new(
-        "Search query \"#{params[:search_term]}\"",
+        "Search Term \"#{params[:search_term]}\"",
         self.class.instance_variable_get(:@schema).keys,
         PTData::PTV.search(params[:search_term], {
           match_stop_by_suburb:  params[:match_by_suburb] && id == :stops_search,

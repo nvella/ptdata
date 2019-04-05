@@ -104,16 +104,16 @@ module PTData
     get '/search' do
       query_id = case params[:what]
       when 'stops'
-        :stop_search
+        :stops_search
       when 'routes'
-        :route_search
+        :roues_search
       when 'outlets'
-        :outlet_search
+        :outlets_search
       else
         throw 'invalid search query type'
       end
 
-      query_id.to_s
+      redirect to(lq(query_id, search_term: params[:term], match_by_suburb: true))
     end
     
     # get '/about' do
